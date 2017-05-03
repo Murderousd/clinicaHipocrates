@@ -1,0 +1,28 @@
+<div class="login" align="center">
+    <div class="card login__form">
+        <form  #f="ngForm" id="loginForm" novalidate>
+            <div class="card__body">
+				<div class="input-group col-lg-4">
+					<span class="input-group-addon">Usuario :&nbsp;</span>
+					<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+				</div>
+				<div class="input-group col-lg-4">
+					<span class="input-group-addon">Clave :&nbsp;&nbsp;&nbsp;&nbsp;</span>
+					<input type="password" class="form-control" aria-label="Amount (to the nearest dollar)">
+				</div>
+            </div>
+            <div class="card__footer">
+                <div class="paraloader"></div>
+                <div class="row">
+                	<br>
+                    <div class="float-right">
+						<button class="btn btn-default" (click)="login()">
+                            <span >Ingresar</span>
+                            <span  class="btn-loader"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
