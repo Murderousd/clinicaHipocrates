@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Web.Configuration;
+using System.Web.Script.Serialization;
 // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
 public class Service : IService
 {
@@ -178,6 +179,31 @@ public class Service : IService
 
         return msg;
     }
+
+    public List<String> listarUsuarios() {
+        var instancia = new Helper();
+        string conexion = instancia.getStringConexion();
+        List<String> columnData = new List<String>();
+
+        using (SqlConnection connection = new SqlConnection(conexion))
+        {
+            connection.Open();
+            string query = "select * from [dbo].[tblUsuario]";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        columnData.Add(reader.GetString(1));
+                    }
+                }
+            }
+        }
+        JavaScriptSerializer serializer = new JavaScriptSerializer();
+        return columnData;
+    }
+
 
 
 	public CompositeType GetDataUsingDataContract(CompositeType composite)

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Web.Script.Services;
 
 // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IService1" en el código y en el archivo de configuración a la vez.
 [ServiceContract]
@@ -14,11 +15,20 @@ public interface IService
 	
 
     [OperationContract]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]//Specify return format. 
     string insertarUsuario(int rut, string nombre, string paterno, string materno, string telPersonal, string telTrabajo, string anexo, string mail, string password, int tipoUsuario, string recepcionista);
 
     [OperationContract]
     string actualizarUsuario(int rut, string nombre, string paterno, string materno, string telPersonal, string telTrabajo, string anexo, string mail, string password, int tipoUsuario, string recepcionista);
+    
+    //[OperationContract]
+     //List<String> listarUsuarios();
 
+    [OperationContract]
+    [WebInvoke(Method = "GET",
+UriTemplate = "/listarUsuarios",
+BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+    List<String> listarUsuarios();
 
     [OperationContract]
     string eliminarUsuario(int rut);
