@@ -21,6 +21,8 @@ public class Helper
         return @"Data Source=DESKTOP-45G0HBI\SQLEXPRESS;Initial Catalog=DBHIPOCRATES;Integrated Security=True";
     }
 
+
+
     public string GenerateAPassKey(string passphrase)
     {
         // Pass Phrase can be any string

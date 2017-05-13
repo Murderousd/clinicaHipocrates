@@ -25,13 +25,14 @@ public class Service : IService
 
     }
 
-    //if (nombre == "" || paterno == "" || materno == "" || telPersonal == "" || telTrabajo == "" || anexo == "" || mail == "" || password == "" || Convert.ToInt16(tipoUsuario) == "" || recepcionista == "") { 
-    
-    //}
-    // como obtener el nombre del server, tirar esta qry en sql DESKTOP-45G0HBI\SQLEXPRESS SELECT @@SERVERNAME AS 'Server Name'  
+
     var instancia = new Helper();
     string conexion = instancia.getStringConexion();
-       
+
+
+    String KeyString = instancia.GenerateAPassKey("PassKey");
+    String EncryptedPassword = instancia.Encrypt("25Characterlengthpassword!", KeyString);
+    String DecryptedPassword = instancia.Decrypt(EncryptedPassword, KeyString);
         SqlConnection myConnection2 = new SqlConnection(conexion);
 
 
@@ -202,6 +203,49 @@ public class Service : IService
         }
         JavaScriptSerializer serializer = new JavaScriptSerializer();
         return columnData;
+    }
+
+    public string loginUsuario(int rut, string password)
+    {
+
+        try
+        {
+
+            var instancia = new Helper();
+            string conexion = instancia.getStringConexion();
+            SqlConnection sqlConnection1 = new SqlConnection(conexion);
+            SqlCommand cmd = new SqlCommand();
+            SqlDataReader reader;
+
+            cmd.CommandText = "SELECT  count(*) FROM tblUsuario WHERE usuario_rut = " + rut + " AND usuario_password = " + password;
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = sqlConnection1;
+
+            sqlConnection1.Open();
+
+            //reader = cmd.ExecuteReader();
+            // Data is accessible through the DataReader object here.
+
+            Int32 count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count > 0)
+            {
+                return "ok";
+            }
+            else
+            {
+                return "error";
+            }
+
+
+            sqlConnection1.Close();
+        }
+        catch (SqlException ex)
+        {
+            return "Se produjo un error: " + ex.Message;
+        }
+
+      
+
     }
 
 

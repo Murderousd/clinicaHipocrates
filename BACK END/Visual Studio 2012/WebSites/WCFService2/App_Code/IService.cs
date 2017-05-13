@@ -25,13 +25,16 @@ public interface IService
      //List<String> listarUsuarios();
 
     [OperationContract]
-    [WebInvoke(Method = "GET",
+    /*[WebInvoke(Method = "GET",
 UriTemplate = "/listarUsuarios",
-BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+BodyStyle = WebMessageBodyStyle.Wrapped, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]*/
     List<String> listarUsuarios();
 
     [OperationContract]
     string eliminarUsuario(int rut);
+
+    [OperationContract]
+    string loginUsuario(int rut, string password);
 
 	[OperationContract]
 	CompositeType GetDataUsingDataContract(CompositeType composite);
