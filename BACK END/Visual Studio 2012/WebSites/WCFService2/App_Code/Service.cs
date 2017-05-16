@@ -20,10 +20,7 @@ public class Service : IService
     public string insertarUsuario(int rut, string nombre, string paterno, string materno, string telPersonal, string telTrabajo, string anexo, string mail, string password, int tipoUsuario, string recepcionista)
 {
          string msg = "";
-        msg = "rut inválido";
-    if (Convert.ToInt16(rut) == 0|| rut.ToString().Length < 9) {
-
-    }
+     
 
 
     var instancia = new Helper();
@@ -81,6 +78,8 @@ public class Service : IService
 
          return msg;
 }
+
+
 
     public string actualizarUsuario(int rut, string nombre, string paterno, string materno, string telPersonal, string telTrabajo, string anexo, string mail, string password, int tipoUsuario, string recepcionista)
     {
@@ -185,6 +184,10 @@ public class Service : IService
         var instancia = new Helper();
         string conexion = instancia.getStringConexion();
         List<String> columnData = new List<String>();
+
+
+
+
 
         using (SqlConnection connection = new SqlConnection(conexion))
         {

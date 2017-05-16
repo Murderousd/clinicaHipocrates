@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,11 +18,22 @@ public class Helper
 		//
 	}
 
-    public string getStringConexion() {
+    /*public string getStringConexion() {
         return @"Data Source=DESKTOP-45G0HBI\SQLEXPRESS;Initial Catalog=DBHIPOCRATES;Integrated Security=True";
+    }*/
+
+    public string getStringConexion()
+    {
+
+        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+        builder.DataSource = "qfmoo0z6on.database.windows.net";
+        builder.UserID = "cortuzar";
+        builder.Password = "Integracion99";
+        builder.InitialCatalog = "DBHIPOCRATES";
+
+        return builder.ConnectionString;
+
     }
-
-
 
     public string GenerateAPassKey(string passphrase)
     {
